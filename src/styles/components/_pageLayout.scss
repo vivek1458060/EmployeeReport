@@ -1,0 +1,18 @@
+.logo {
+    color: white;
+    font-weight: 600;
+    font-size: 22px;
+  }
+
+  .side-menu__item, .side-subMenu__item {
+      border-radius: 3px;
+  }
+
+  .side-menu {
+      padding: 10px
+    }
+
+    .side-menu.ant-menu-inline-collapsed {
+        padding: 0;
+    }
+  
