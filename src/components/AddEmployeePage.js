@@ -6,7 +6,6 @@ import { startAddEmployee } from '../actions/employees';
 export class AddEmployeePage extends React.Component {
     onSubmit = (employee) => {
         this.props.startAddEmployee(employee);
-        this.props.history.push('/dashboard');
     }
     render() {
         return (

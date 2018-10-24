@@ -11,7 +11,6 @@ export class CustomRoute extends React.Component {
       };
     
       onCollapse = (collapsed) => {
-        console.log(collapsed);
         this.setState({ collapsed });
       }
     
@@ -45,6 +44,12 @@ export class CustomRoute extends React.Component {
                                 <Link to="/addEmployee">
                                     <Icon type="user-add" theme="outlined" />
                                     <span>Add Employee</span>
+                                </Link>
+                            </Menu.Item>
+                            <Menu.Item key="3" className="side-menu__item">
+                                <Link to="/editEmployee">
+                                    <Icon type="dashboard" theme="outlined" />
+                                    <span>Reports</span>
                                 </Link>
                             </Menu.Item>
                             <SubMenu
@@ -99,7 +104,7 @@ export class CustomRoute extends React.Component {
                             </div>
                         </Content>
                         <Footer style={{ textAlign: 'center' }}>
-                            Front Design ©2018 Created by Vivek mishra
+                            Design ©2018 Created by Vivek mishra
                         </Footer>
                     </Layout>
                 </Layout>

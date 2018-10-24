@@ -59,7 +59,8 @@ export class DashboardPage extends React.Component {
                     },
                     {
                         Header: "Emp Type",
-                        accessor: "empType"
+                        accessor: "empType",
+                        filterable: true
                     },
                     {
                         Header: "Status",
@@ -79,52 +80,67 @@ export class DashboardPage extends React.Component {
                     },
                     {
                         Header: "Country",
-                        accessor: "country"
+                        accessor: "country",
+                        filterable: true
                     }, {
                         Header: "Location",
-                        accessor: "location"
+                        accessor: "location",
+                        filterable: true
                     }, {
                         Header: "Mobile",
-                        accessor: "mobile"
+                        accessor: "mobile",
+                        filterable: true
                     }, {
                         Header: "Email Id",
-                        accessor: "email"
+                        accessor: "email",
+                        filterable: true
                     }, {
                         Header: "Delivery Manager",
-                        accessor: "deliveryManager"
+                        accessor: "deliveryManager",
+                        filterable: true
                     }, {
                         Header: "Project Name",
-                        accessor: "projectName"
+                        accessor: "projectName",
+                        filterable: true
                     }, {
                         Header: "Project Role",
-                        accessor: "projectRole"
+                        accessor: "projectRole",
+                        filterable: true
                     }, {
                         Header: "Tcs Designation",
-                        accessor: "tcsDesignation"
+                        accessor: "tcsDesignation",
+                        filterable: true
                     }, {
                         Header: "Sr/Jr",
                         accessor: "tcsDesignation",
                         Cell: row => (
                             row.value ? row.value === 'C2' ? 'Jr' : 'Sr' : ''
-                        )
+                        ),
+                        filterable: true
                     }, {
                         Header: "Bill Rate",
-                        accessor: "billRate"
+                        accessor: "billRate",
+                        filterable: true
                     }, {
                         Header: "Tcs Cost",
-                        accessor: "tcsCost"
+                        accessor: "tcsCost",
+                        filterable: true
                     }, {
                         Header: "Account Joining Date",
-                        accessor: "accountJoiningDate"
+                        accessor: "accountJoiningDate",
+                        filterable: true
                     }, {
                         Header: "Billing Start Date",
-                        accessor: "billingStartDate"
+                        accessor: "billingStartDate",
+                        filterable: true
                     }, {
                         Header: "Margin",
-                        Cell: (row) => <span>{row.original.billRate - row.original.tcsCost}</span>
+                        Cell: (row) => <span>{row.original.billRate - row.original.tcsCost}</span>,
+                        filterable: true
                     }, {
                         Header: "Laptop Id",
-                        accessor: "laptopId"
+                        accessor: "laptopId",
+                        filterable: true
                     }]}
                     defaultSorted={[
                         {
