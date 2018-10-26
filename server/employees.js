@@ -15,12 +15,24 @@ var saveEmployees = (employees) => {
     fs.writeFileSync(employeeDataFilePath, JSON.stringify(employees));
 }
 
+const calculateMargin = (country, billRate, tcsCost) => {
+    let dailyWorkingHours = 8;
+    if(country === 'India') {
+        dailyWorkingHours = 8.75;
+    }
+    const monthyCostToClient = billRate*dailyWorkingHours*21*72.625;
+    const monthlyCostToTcs = tcsCost*dailyWorkingHours*21;
+    return monthyCostToClient - monthlyCostToTcs;
+}
+
 var addEmployee = (employee) => {
     var employees = fetchEmployees();
 
     var duplicateEmployees = employees.filter(({ empId }) => empId === employee.empId);
 
     if (duplicateEmployees.length === 0) {
+        const { country, billRate, tcsCost } = employee;
+        employee.margin = calculateMargin(country, billRate, tcsCost)
         employees.push(employee);
         saveEmployees(employees);
         return employee;
@@ -32,6 +44,10 @@ let editEmployee = (empId, updates) => {
     let updatedEmployee;
     employees = employees.map((employee) => {
         if (employee.empId === empId) {
+            if(employee.country !== updates.country || employee.tcsCost !== updates.tcsCost || employee.billRate !== updates.billRate) {
+                updates.margin = calculateMargin(updates.country, updates.billRate, updates.tcsCost);
+            }
+            
             updatedEmployee = {
                 ...employee,
                 ...updates

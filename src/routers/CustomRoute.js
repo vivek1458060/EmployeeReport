@@ -1,5 +1,6 @@
 import React from 'react';
 import {Route, Redirect, Link} from 'react-router-dom';
+import { history } from './AppRouter';
 
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
@@ -8,7 +9,7 @@ const SubMenu = Menu.SubMenu
 export class CustomRoute extends React.Component {
     state = {
         collapsed: false,
-      };
+      }
     
       onCollapse = (collapsed) => {
         this.setState({ collapsed });
@@ -30,63 +31,28 @@ export class CustomRoute extends React.Component {
                     >
                         <Menu
                             theme="dark"
-                            defaultSelectedKeys={["1"]}
+                            defaultSelectedKeys={[history.location.pathname.split('/').pop()]}
                             mode="inline"
                             className="side-menu"
                         >
-                            <Menu.Item key="1" className="side-menu__item">
+                            <Menu.Item key="dashboard" className="side-menu__item">
                                 <Link to="/dashboard">
-                                    <Icon type="team" />
-                                    <span>Employees</span>
-                                </Link>
-                            </Menu.Item>
-                            <Menu.Item key="2" className="side-menu__item">
-                                <Link to="/addEmployee">
-                                    <Icon type="user-add" theme="outlined" />
-                                    <span>Add Employee</span>
-                                </Link>
-                            </Menu.Item>
-                            <Menu.Item key="3" className="side-menu__item">
-                                <Link to="/editEmployee">
                                     <Icon type="dashboard" theme="outlined" />
                                     <span>Reports</span>
                                 </Link>
                             </Menu.Item>
-                            <SubMenu
-                                key="sub1"
-                                title={
-                                    <span>
-                                        <Icon type="user" />
-                                        <span>User</span>
-                                    </span>
-                                }
-                            >
-                                <Menu.Item key="3" className="side-subMenu__item">
-                                    Tom
-                                </Menu.Item>
-                                <Menu.Item key="4" className="side-subMenu__item">
-                                    Bill
-                                </Menu.Item>
-                                <Menu.Item key="5" className="side-subMenu__item">
-                                    Alex
-                                </Menu.Item>
-                            </SubMenu>
-                            <SubMenu
-                                key="sub2"
-                                title={
-                                    <span>
-                                        <Icon type="team" />
-                                        <span>Team</span>
-                                    </span>
-                                }
-                            >
-                                <Menu.Item key="6" className="side-subMenu__item">
-                                    Team 1
-                                </Menu.Item>
-                                <Menu.Item key="8" className="side-subMenu__item">
-                                    Team 2
-                                </Menu.Item>
-                            </SubMenu>
+                            <Menu.Item key="employeeList" className="side-menu__item">
+                                <Link to="/employeeList">
+                                    <Icon type="user-add" theme="outlined" />
+                                    <span>Employee List</span>
+                                </Link>
+                            </Menu.Item>
+                            <Menu.Item key="addEmployee" className="side-menu__item">
+                                <Link to="/addEmployee">
+                                    <Icon type="team" />
+                                    <span>Add Employee</span>
+                                </Link>
+                            </Menu.Item>
                             <Menu.Item key="9" className="side-menu__item">
                                 <Icon type="file" />
                                 <span>File</span>
@@ -96,8 +62,7 @@ export class CustomRoute extends React.Component {
                     <Layout>
                         <Content style={{ margin: '0 16px' }}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
-                                <Breadcrumb.Item>User</Breadcrumb.Item>
-                                <Breadcrumb.Item>Bill</Breadcrumb.Item>
+                                <Breadcrumb.Item>{history.location.pathname.split('/').pop()}</Breadcrumb.Item>
                             </Breadcrumb>
                             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                                 <Route {...this.props.rest} component={this.props.component} />
@@ -114,3 +79,23 @@ export class CustomRoute extends React.Component {
 }
 
 export default CustomRoute;
+
+// <SubMenu
+//     key="sub1"
+//     title={
+//         <span>
+//             <Icon type="user" />
+//             <span>User</span>
+//         </span>
+//     }
+// >
+//     <Menu.Item key="3" className="side-subMenu__item">
+//         Tom
+//     </Menu.Item>
+//     <Menu.Item key="4" className="side-subMenu__item">
+//         Bill
+//     </Menu.Item>
+//     <Menu.Item key="5" className="side-subMenu__item">
+//         Alex
+//     </Menu.Item>
+// </SubMenu>

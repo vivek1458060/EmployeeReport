@@ -37,7 +37,7 @@ export const startEditEmployee = (empId, updates) => {
             dispatch(editEmployee(empId, response.data.employee));
         }).catch((e) => {
             if(e.response.status === 404) {
-                alert('Employee width this Id not found!');
+                alert('Employee with this Id not found!');
             }
             console.log(e)
         });

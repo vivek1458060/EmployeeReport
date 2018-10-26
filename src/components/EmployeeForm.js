@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { connect } from 'react-redux';
 
 import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, DatePicker } from 'antd';
 
@@ -143,11 +144,15 @@ export class EmployeeForm extends React.Component {
         >
           {getFieldDecorator('country', {
             initialValue: this.state.country,
-            rules: [{
-              required: true, message: 'Please enter Country',
-            }],
+            rules: [{ required: true, message: 'Please enter Country' }],
           })(
-            <Input/>
+            <Select
+              placeholder="Select country"
+            >
+              <Option value="India">India</Option>
+              <Option value="China">China</Option>
+              <Option value="United States">United States</Option>
+            </Select>
           )}
         </FormItem>
         <FormItem
@@ -203,8 +208,9 @@ export class EmployeeForm extends React.Component {
             <Select
               placeholder="Select"
             >
-              <Option value="GBM">GBM</Option>
-              <Option value="ORI">ORI</Option>
+              {
+                this.props.projectTypes.map((type) => <Option value={type} key={type}>{type}</Option>)
+              }
             </Select>
           )}
         </FormItem>
@@ -283,7 +289,7 @@ export class EmployeeForm extends React.Component {
               required: true, message: 'Please enter employee bill rate',
             }],
           })(
-            <Input addonBefore={<Icon type="dollar" theme="outlined" />}/>
+            <Input addonBefore={<Icon type="dollar" theme="outlined" />} type="number"/>
           )}
         </FormItem>
         <FormItem
@@ -297,7 +303,7 @@ export class EmployeeForm extends React.Component {
               required: true, message: 'Please enter TCS Cost',
             }],
           })(
-            <Input addonBefore="₹" />
+            <Input addonBefore="₹" type="number"/>
           )}
         </FormItem>
         <FormItem {...tailFormItemLayout}>
@@ -308,4 +314,8 @@ export class EmployeeForm extends React.Component {
   }
 }
 
-export default Form.create()(EmployeeForm);
+const mapStateToProps = (state) => ({
+  projectTypes: state.project.projectTypes
+})
+
+export default connect(mapStateToProps)(Form.create()(EmployeeForm));

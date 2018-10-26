@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ReactChartkick, { LineChart, PieChart } from 'react-chartkick'
+import ReactChartkick, { PieChart } from 'react-chartkick'
 import Chart from 'chart.js'
 
 ReactChartkick.addAdapter(Chart);
@@ -10,10 +10,10 @@ export class SeniorJuniorRatio extends React.Component {
     render() {
         let totalSenior = 0;
         let totalJunior = 0;
-        this.props.employees.forEach(({ tcsDesignation }) => {
-            if(tcsDesignation && tcsDesignation === 'C2') {
+        this.props.employees.forEach(({ tcsDesignation, status }) => {
+            if(tcsDesignation && tcsDesignation === 'C2' && status === 'Active') {
                 totalJunior += 1;
-            } else if(tcsDesignation) {
+            } else if(tcsDesignation && status === 'Active') {
                 totalSenior += 1;
             }
         })

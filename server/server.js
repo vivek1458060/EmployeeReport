@@ -32,6 +32,10 @@ app.post('/employees/edit', (req, res) => {
   }
 })
 
+app.get('/project/types', (req, res) => {
+  res.send({ projectTypes: ['ORI', 'GBM', 'INAV'] })
+})
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'))
 })
