@@ -9,6 +9,7 @@ var app = express();
 const publicPath = path.join(__dirname, '..', 'public');
 app.use(express.static(publicPath));
 app.use(bodyParser.json());
+const port = process.env.PORT || 3000;
 
 app.get('/employees/list', (req, res) => {
   res.send({employees: employees.getAll()})
@@ -40,6 +41,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'))
 })
 
-app.listen(3000, () => {
-  console.log(`started up at port 3000`);
+app.listen(port, () => {
+  console.log(`started up at port ${port}`);
 });
