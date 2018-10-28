@@ -12,7 +12,7 @@ export const startAddEmployee = (employeeData = {}) => {
             employee: employeeData
         }).then((response) => {
             dispatch(addEmployee(response.data.employee));
-            history.push('/dashboard');
+            history.push('/employeeList');
         }).catch((e) => {
             if(e.response.status === 400) {
                 alert('Employee with this Id already exist!')
