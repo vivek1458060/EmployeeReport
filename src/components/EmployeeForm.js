@@ -102,7 +102,7 @@ export class EmployeeForm extends React.Component {
               required: true, message: 'Please input Employee Id',
             }],
           })(
-            <Input disabled={this.state.empId ? true : false }/>
+            <Input disabled={this.state.empId ? true : false } placeholder="Employee Id"/>
           )}
         </FormItem>
         <FormItem
@@ -115,7 +115,7 @@ export class EmployeeForm extends React.Component {
               required: true, message: 'Please input Employee Name',
             }],
           })(
-            <Input/>
+            <Input placeholder="Employee Name"/>
           )}
         </FormItem>
         <FormItem
@@ -165,7 +165,7 @@ export class EmployeeForm extends React.Component {
               required: true, message: 'Please enter Location',
             }],
           })(
-            <Input/>
+            <Input placeholder="Location"/>
           )}
         </FormItem>
         <FormItem
@@ -179,7 +179,7 @@ export class EmployeeForm extends React.Component {
               required: true, message: 'Please enter Mobile number',
             }],
           })(
-            <Input/>
+            <Input placeholder="Mobile number"/>
           )}
         </FormItem>
         <FormItem
@@ -194,7 +194,7 @@ export class EmployeeForm extends React.Component {
               required: true, message: 'Please input your E-mail!',
             }],
           })(
-            <Input />
+            <Input placeholder="E-mail"/>
           )}
         </FormItem>
         <FormItem

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Redirect, Link} from 'react-router-dom';
+import { Route, Redirect, Link } from 'react-router-dom';
 import { history } from './AppRouter';
 
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
@@ -9,17 +9,17 @@ const SubMenu = Menu.SubMenu
 export class CustomRoute extends React.Component {
     state = {
         collapsed: false,
-      }
-    
-      onCollapse = (collapsed) => {
+    }
+
+    onCollapse = (collapsed) => {
         this.setState({ collapsed });
-      }
-    
+    }
+
     render() {
         return (
             <Layout style={{ minHeight: '100vh', maxWidth: '1100px', margin: 'auto' }}>
                 <Header>
-                    <div className="logo">myLogo</div>
+                    <img className="logo" src="images/logo.png" height="45" width="160"/>
                 </Header>
                 <Layout>
                     <Sider
@@ -43,26 +43,28 @@ export class CustomRoute extends React.Component {
                             </Menu.Item>
                             <Menu.Item key="employeeList" className="side-menu__item">
                                 <Link to="/employeeList">
-                                    <Icon type="user-add" theme="outlined" />
+                                    <Icon type="team" theme="outlined" />
                                     <span>Employee List</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="addEmployee" className="side-menu__item">
                                 <Link to="/addEmployee">
-                                    <Icon type="team" />
+                                    <Icon type="user-add" />
                                     <span>Add Employee</span>
                                 </Link>
-                            </Menu.Item>
-                            <Menu.Item key="9" className="side-menu__item">
-                                <Icon type="file" />
-                                <span>File</span>
                             </Menu.Item>
                         </Menu>
                     </Sider>
                     <Layout>
                         <Content style={{ margin: '0 16px' }}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
-                                <Breadcrumb.Item>{history.location.pathname.split('/').pop()}</Breadcrumb.Item>
+                                <Breadcrumb.Item>
+                                    <b>{history.location.pathname.split('/').pop()
+                                        .replace(/([A-Z])/g, (match) => ` ${match}`)
+                                        .replace(/^./, (match) => match.toUpperCase())
+                                        .trim()}
+                                    </b>
+                                </Breadcrumb.Item>
                             </Breadcrumb>
                             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                                 <Route {...this.props.rest} component={this.props.component} />

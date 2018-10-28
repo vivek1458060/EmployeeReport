@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Radio, Modal } from 'antd';
 import ReactTable from "react-table";
 import moment from 'moment';
+import _ from 'lodash';
 
 import EmployeeForm from './EmployeeForm';
 import { startEditEmployee } from '../actions/employees';
@@ -56,7 +57,7 @@ export class EmployeeListPage extends React.Component {
                     {
                         Header: "Emp Name",
                         accessor: "empName",
-                        Cell: row => row.value.charAt(0).toUpperCase() + row.value.slice(1).toLowerCase(),
+                        Cell: row => _.capitalize(row.value),
                         filterable: true
                     },
                     {
@@ -78,7 +79,8 @@ export class EmployeeListPage extends React.Component {
                                     row.value
                                 }
                             </span>
-                        )
+                        ),
+                        filterable: true
                     },
                     {
                         Header: "Country",

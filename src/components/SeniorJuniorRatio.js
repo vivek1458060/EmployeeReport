@@ -18,7 +18,9 @@ export class SeniorJuniorRatio extends React.Component {
             }
         })
         return (
-            <PieChart data={[["Senior", totalSenior], ["Junior", totalJunior]]} />
+            <PieChart 
+                data={[["Senior", totalSenior], ["Junior", totalJunior]]} 
+            />
         )
     }
 }

@@ -8,10 +8,10 @@ export class DashboardPage extends React.Component {
         return (
             <Row>
                 <Col xs={{ span: 24 }} lg={{ span: 12  }}>
-                    <SeniorJuniorRatio />
+                    <MarginGraph />
                 </Col>
                 <Col xs={{ span: 24 }} lg={{ span: 12 }}>
-                    <MarginGraph />
+                    <SeniorJuniorRatio />
                 </Col>
             </Row>
         )

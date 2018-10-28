@@ -19,7 +19,11 @@ export class SeniorJuniorRatio extends React.Component {
             return [projectName, data[projectName]]
         })
         return (
-            <BarChart data={barChartData} xtitle="Project level Margin(Rs)"/>
+            <BarChart 
+                data={barChartData} 
+                xtitle="Project level Margin(Rs)"
+                ytitle="Project(s)"
+            />
         )
     }
 }
