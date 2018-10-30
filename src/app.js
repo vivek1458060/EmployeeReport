@@ -8,7 +8,7 @@ import './styles/styles.scss';
 import LoadingPage from './components/LoadingPage';
 import configureStore from './store/configureStore';
 import { startSetEmployees } from './actions/employees';
-import { startSetProjectTypes } from './actions/project';
+import { startSetFieldDetails } from './actions/settings';
 
 const store = configureStore();
 
@@ -24,7 +24,7 @@ const renderApp = () => {
 
 ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
-store.dispatch(startSetProjectTypes());
+store.dispatch(startSetFieldDetails());
 store.dispatch(startSetEmployees()).then(() => {
     renderApp();
     if(history.location.pathname === '/') {

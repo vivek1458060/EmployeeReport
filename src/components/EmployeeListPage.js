@@ -136,15 +136,17 @@ export class EmployeeListPage extends React.Component {
                         Cell: row => moment(row.value).format('L'),
                         filterable: true
                     }, {
-                        Header: "Bill Rate",
+                        Header: "Bill Rate($/hr)",
                         accessor: "billRate",
+                        Cell: row => `$${row.value}`,
                         filterable: true
                     }, {
                         Header: "Tcs Cost",
                         accessor: "tcsCost",
+                        Cell: row => `₹${row.value}`,
                         filterable: true
                     },{
-                        Header: "Margin",
+                        Header: "Margin(%)",
                         accessor: 'margin',
                         filterable: true
                     }]}

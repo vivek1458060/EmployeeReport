@@ -71,7 +71,7 @@ export class CustomRoute extends React.Component {
                             </div>
                         </Content>
                         <Footer style={{ textAlign: 'center' }}>
-                            Design ©2018 Created by Vivek mishra
+                            Design ©2018 SSBT Account
                         </Footer>
                     </Layout>
                 </Layout>

@@ -120,6 +120,22 @@ export class EmployeeForm extends React.Component {
         </FormItem>
         <FormItem
           {...formItemLayout}
+          label="Employee Type"
+        >
+          {getFieldDecorator('empType', {
+            initialValue: this.state.empType
+          })(
+            <Select
+              placeholder="Select Employee Type"
+            >
+              {
+                this.props.empTypes.map((type) => <Option value={type} key={type}>{type}</Option>)
+              }
+            </Select>
+          )}
+        </FormItem>
+        <FormItem
+          {...formItemLayout}
           label="Status"
           validateStatus={this.state.validateStatus}
           hasFeedback
@@ -315,7 +331,8 @@ export class EmployeeForm extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  projectTypes: state.project.projectTypes
+  projectTypes: state.settings.projectTypes,
+  empTypes: state.settings.empTypes
 })
 
 export default connect(mapStateToProps)(Form.create()(EmployeeForm));

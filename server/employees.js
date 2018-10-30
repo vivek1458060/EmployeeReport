@@ -1,5 +1,6 @@
 let fs = require('fs');
 const path = require('path');
+const _ = require('lodash');
 const employeeDataFilePath = path.join(__dirname, 'employees-data.json');
 
 let fetchEmployees = () => {
@@ -15,14 +16,15 @@ var saveEmployees = (employees) => {
     fs.writeFileSync(employeeDataFilePath, JSON.stringify(employees));
 }
 
-const calculateMargin = (country, billRate, tcsCost) => {
+const calculateMargin = (empType, country, billRate, tcsCost) => {
     let dailyWorkingHours = 8;
     if(country === 'India') {
         dailyWorkingHours = 8.75;
     }
     const monthyCostToClient = billRate*dailyWorkingHours*21*72.625;
-    const monthlyCostToTcs = tcsCost*dailyWorkingHours*21;
-    return monthyCostToClient - monthlyCostToTcs;
+    const monthlyCostToTcs = empType === 'PA' ? tcsCost*21 : tcsCost;
+    console.log(monthyCostToClient, monthlyCostToTcs)
+    return _.round(((monthyCostToClient - monthlyCostToTcs)/monthyCostToClient)*100, 3);
 }
 
 var addEmployee = (employee) => {
@@ -31,8 +33,8 @@ var addEmployee = (employee) => {
     var duplicateEmployees = employees.filter(({ empId }) => empId === employee.empId);
 
     if (duplicateEmployees.length === 0) {
-        const { country, billRate, tcsCost } = employee;
-        employee.margin = calculateMargin(country, billRate, tcsCost)
+        const { empType, country, billRate, tcsCost } = employee;
+        employee.margin = calculateMargin(empType, country, billRate, tcsCost)
         employees.push(employee);
         saveEmployees(employees);
         return employee;
@@ -44,8 +46,8 @@ let editEmployee = (empId, updates) => {
     let updatedEmployee;
     employees = employees.map((employee) => {
         if (employee.empId === empId) {
-            if(employee.country !== updates.country || employee.tcsCost !== updates.tcsCost || employee.billRate !== updates.billRate) {
-                updates.margin = calculateMargin(updates.country, updates.billRate, updates.tcsCost);
+            if(employee.empType !== updates.empType || employee.country !== updates.country || employee.tcsCost !== updates.tcsCost || employee.billRate !== updates.billRate) {
+                updates.margin = calculateMargin(updates.empType, updates.country, updates.billRate, updates.tcsCost);
             }
             
             updatedEmployee = {

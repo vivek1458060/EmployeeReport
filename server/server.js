@@ -33,8 +33,11 @@ app.post('/employees/edit', (req, res) => {
   }
 })
 
-app.get('/project/types', (req, res) => {
-  res.send({ projectTypes: ['ORI', 'GBM', 'INAV'] })
+app.get('/field', (req, res) => {
+  res.send({ 
+    projectTypes: ['ORI', 'GBM', 'INAV'], 
+    empTypes: ['PA', 'BA'] 
+  })
 })
 
 app.get('*', (req, res) => {

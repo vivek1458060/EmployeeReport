@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 import ReactChartkick, { BarChart } from 'react-chartkick'
 import Chart from 'chart.js'
@@ -20,24 +21,34 @@ export class SeniorJuniorRatio extends React.Component {
     render() {
         let barChartData = [];
         if (this.state.marginType === "projectLevelMargin") {
-            const data = {};
+            const marginData = {};
+            const employeeCountData = {};
             this.props.employees.forEach(({ status, projectName, margin }) => {
                 if (status === 'Active') {
-                    data[projectName] = data[projectName] || 0;
-                    data[projectName] += margin;
+                    marginData[projectName] = marginData[projectName] || 0;
+                    marginData[projectName] += margin;
+                    employeeCountData[projectName] = employeeCountData[projectName] || 0;
+                    employeeCountData[projectName] += 1;
                 }
             })
-            barChartData = Object.keys(data).map((projectName) => {
-                return [projectName, data[projectName]]
+            console.log(marginData, employeeCountData)
+            barChartData = Object.keys(marginData).map((projectName) => {
+                let totalMargin = 0;
+                if(employeeCountData[projectName]) {
+                    totalMargin = marginData[projectName] / employeeCountData[projectName];
+                }
+                return [projectName, _.round(totalMargin, 3)];
             })
         } else {
             let totalMargin = 0;
+            let totalEmployee = 0;
             this.props.employees.forEach(({ margin, status }) => {
                 if (status === 'Active') {
                     totalMargin += margin;
+                    totalEmployee += 1;
                 }
             })
-            barChartData = [["Account Level", totalMargin]]
+            barChartData = totalEmployee ? [["Account Level", _.round(totalMargin/totalEmployee, 3)]] : []
         }
         return (
             <div>
